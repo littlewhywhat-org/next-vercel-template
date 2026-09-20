@@ -13,7 +13,7 @@ Never put `SERVICE_ROLE` in `NEXT_PUBLIC_*`.
 
 `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` per target.
 
-Anonymous must be on in Authentication → Providers for both projects.
+Anonymous must be on in Authentication → Providers for both hosted projects. Local e2e uses `supabase start` (`enable_anonymous_sign_ins` in `supabase/config.toml`).
 
 ## Tables
 

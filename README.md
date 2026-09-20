@@ -6,6 +6,7 @@ Anonymous Auth, RLS `todos`, Gherkin + Cucumber, Preview → staging / tag → p
 
 - Node 24 (`.nvmrc`)
 - npm
+- Docker (for local Supabase / e2e)
 
 ## Development
 
@@ -28,10 +29,13 @@ Projects: `pets-staging` (`cwmzjcppchjydaboycje`), `pets-prod` (`mhvcyahudzacdgn
 ## Scripts
 
 ```bash
+npx supabase start         # local API http://127.0.0.1:54321, applies supabase/migrations
 npm run ci                 # lint + typecheck + gherkin
 npm run validate:gherkin
-npm run test:e2e           # Cucumber + Playwright (needs running app + Anonymous)
+npm run test:e2e           # Cucumber + Playwright against local Supabase, not staging
 ```
+
+E2E on GitHub Actions (PR label `e2e`) also runs `supabase start`. Anonymous users and todos stay on the runner and die with the job. Preview/production still use pets-staging / pets-prod.
 
 ## GitHub secrets
 

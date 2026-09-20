@@ -14,20 +14,22 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
+      - uses: supabase/setup-cli@v1
+        with:
+          version: 2.58.5
       - run: npm ci
       - run: npx playwright install --with-deps chromium
-      - run: npm run build
+      - name: Start local Supabase
+        run: supabase start
+      - name: Build, start app, e2e
         env:
-          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
-          NEXT_PUBLIC_ENV: preview
-      - name: Start app and run e2e
-        env:
-          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
           NEXT_PUBLIC_ENV: preview
           BASE_URL: http://127.0.0.1:3000
         run: |
+          eval "$(supabase status -o env)"
+          export NEXT_PUBLIC_SUPABASE_URL="$API_URL"
+          export NEXT_PUBLIC_SUPABASE_ANON_KEY="$ANON_KEY"
+          npm run build
           npm start &
           npx wait-on http://127.0.0.1:3000
           npm run test:e2e
