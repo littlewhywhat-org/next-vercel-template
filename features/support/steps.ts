@@ -4,7 +4,16 @@ import type { TodoWorld } from './world.ts';
 
 Given('user is signed in', async function (this: TodoWorld) {
   await this.page.goto('/');
-  await this.page.getByTestId('todo-list').waitFor({ timeout: 20_000 });
+  const list = this.page.getByTestId('todo-list');
+  const error = this.page.getByTestId('todo-error');
+  await Promise.race([
+    list.waitFor({ timeout: 20_000 }),
+    error.waitFor({ timeout: 20_000 }),
+  ]);
+  if (await error.isVisible()) {
+    throw new Error(`sign-in failed: ${await error.innerText()}`);
+  }
+  await list.waitFor();
 });
 
 Given('user is on the list', async function (this: TodoWorld) {
