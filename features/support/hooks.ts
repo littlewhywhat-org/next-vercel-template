@@ -7,8 +7,18 @@ setDefaultTimeout(30_000);
 
 const baseURL = process.env.BASE_URL ?? 'http://127.0.0.1:3000';
 
+function isDryRun(): boolean {
+  return process.argv.includes('--dry-run') || process.argv.includes('-d');
+}
+
 Before(async function (this: TodoWorld) {
-  this.lastLabel = `Buy milk ${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+  const stamp = `${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+  this.lastLabel = `Buy milk ${stamp}`;
+  this.lastOpenLabel = `Open ${stamp}`;
+  this.lastDoneLabel = `Done ${stamp}`;
+  if (isDryRun()) {
+    return;
+  }
   this.browser = await chromium.launch({ headless: true });
   this.context = await this.browser.newContext({ baseURL });
   this.page = await this.context.newPage();

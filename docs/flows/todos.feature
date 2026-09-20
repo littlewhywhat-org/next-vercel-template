@@ -22,3 +22,26 @@ Feature: Todos
     Given user has a todo
     When user deletes it
     Then user does not see that todo
+
+  Rule: Filter
+    Background:
+      Given user has an open todo
+      And user has a done todo
+
+    Scenario: Open
+      When user filters to open
+      Then user sees only the open todo
+
+    Scenario: Done
+      When user filters to done
+      Then user sees only the done todo
+
+    Scenario: All
+      Given user is filtering to done
+      When user filters to all
+      Then user sees both todos
+
+    Scenario: Empty open
+      Given user has no open todos
+      When user filters to open
+      Then user sees an empty open list

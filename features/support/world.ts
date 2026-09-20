@@ -6,6 +6,8 @@ export class TodoWorld extends World {
   context!: BrowserContext;
   page!: Page;
   lastLabel = 'Buy milk';
+  lastOpenLabel = 'Open task';
+  lastDoneLabel = 'Done task';
 }
 
 setWorldConstructor(TodoWorld);

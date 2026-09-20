@@ -30,8 +30,8 @@ Projects: `pets-staging` (`cwmzjcppchjydaboycje`), `pets-prod` (`mhvcyahudzacdgn
 
 ```bash
 npx supabase start         # local API http://127.0.0.1:54321, applies supabase/migrations
-npm run ci                 # lint + typecheck + gherkin
-npm run validate:gherkin
+npm run ci                 # lint + typecheck + cucumber --dry-run
+npm run test:e2e:dry       # parse features and bind steps, no browser
 npm run test:e2e           # Cucumber + Playwright against local Supabase, not staging
 ```
 
