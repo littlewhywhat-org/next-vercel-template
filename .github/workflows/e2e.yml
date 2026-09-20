@@ -27,14 +27,36 @@ jobs:
           BASE_URL: http://127.0.0.1:3000
         run: |
           eval "$(supabase status -o env)"
-          export NEXT_PUBLIC_SUPABASE_URL="${API_URL:-$SUPABASE_URL}"
-          export NEXT_PUBLIC_SUPABASE_ANON_KEY="${ANON_KEY:-$SUPABASE_ANON_KEY}"
+          export NEXT_PUBLIC_SUPABASE_URL="${API_URL:-${SUPABASE_URL:-}}"
+          export NEXT_PUBLIC_SUPABASE_ANON_KEY="${ANON_KEY:-${SUPABASE_ANON_KEY:-${PUBLISHABLE_KEY:-${SUPABASE_PUBLISHABLE_KEY:-}}}}"
           if [ -z "$NEXT_PUBLIC_SUPABASE_URL" ] || [ -z "$NEXT_PUBLIC_SUPABASE_ANON_KEY" ]; then
-            echo "supabase status did not export API_URL/ANON_KEY"
-            supabase status
+            echo "supabase status did not export API URL / anon or publishable key"
+            supabase status -o env | sed -E 's/(KEY|SECRET|PASSWORD|TOKEN)=.*/\1=***/'
             exit 1
           fi
+          echo "Using NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL"
+          echo "Using NEXT_PUBLIC_SUPABASE_ANON_KEY prefix=${NEXT_PUBLIC_SUPABASE_ANON_KEY:0:24}"
+          cat > .env.production <<EOF
+          NEXT_PUBLIC_ENV=preview
+          NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+          EOF
           npm run build
-          npm start &
+          npm start > next-start.log 2>&1 &
           npx wait-on http://127.0.0.1:3000
           npm run test:e2e
+      - name: Dump server log
+        if: failure()
+        run: |
+          echo '--- next-start.log ---'
+          cat next-start.log || true
+      - name: Upload e2e artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-artifacts
+          path: |
+            e2e-artifacts/
+            cucumber-report.json
+            next-start.log
+          if-no-files-found: ignore
