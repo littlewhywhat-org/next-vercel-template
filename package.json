@@ -8,24 +8,34 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "ci": "npm run lint && npm run typecheck"
+    "validate:gherkin": "node scripts/validate-gherkin.mjs",
+    "ci": "npm run lint && npm run typecheck && npm run validate:gherkin",
+    "test:e2e": "tsx node_modules/@cucumber/cucumber/bin/cucumber.js"
   },
   "dependencies": {
     "@radix-ui/themes": "3.3.0",
+    "@supabase/ssr": "^0.8.0",
+    "@supabase/supabase-js": "^2.89.0",
     "next": "16.1.6",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
   "devDependencies": {
-    "eslint-config-next": "^16.1.6",
+    "@cucumber/cucumber": "^12.7.0",
+    "@cucumber/gherkin": "^36.0.0",
+    "@cucumber/messages": "^30.1.0",
     "@types/node": "25.3.2",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "eslint": "9.39.3",
+    "eslint-config-next": "^16.1.6",
     "eslint-config-prettier": "10.1.8",
+    "playwright": "^1.55.0",
     "prettier": "3.8.1",
+    "tsx": "^4.21.0",
     "typescript": "5.9.3",
-    "typescript-eslint": "^8.56.1"
+    "typescript-eslint": "^8.56.1",
+    "wait-on": "^8.0.5"
   },
   "engines": {
     "node": ">=20"

@@ -1,10 +1,10 @@
-# Next.js Vercel CI Template
+# Next.js + Supabase todo template
 
-Minimal Next.js 15 (App Router, TypeScript, Radix UI) starter with preview and production deployments on Vercel.
+Anonymous Auth, RLS `todos`, Gherkin + Cucumber, Preview → staging / tag → production.
 
 ## Prerequisites
 
-- Node 20
+- Node 24 (`.nvmrc`)
 - npm
 
 ## Development
@@ -15,38 +15,39 @@ npm install
 npm run dev
 ```
 
-Home page shows an environment badge and links to the health check at `/api/health`.
+Enable **Anonymous** on both Supabase projects: Authentication → Providers → Anonymous.
 
-## CI/CD
+| Env var | Preview | Production |
+|---|---|---|
+| `NEXT_PUBLIC_ENV` | `preview` | `production` |
+| `NEXT_PUBLIC_SUPABASE_URL` | `https://cwmzjcppchjydaboycje.supabase.co` | `https://mhvcyahudzacdgnqiams.supabase.co` |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | staging anon | prod anon |
 
-GitHub Actions deploys automatically:
+Projects: `pets-staging` (`cwmzjcppchjydaboycje`), `pets-prod` (`mhvcyahudzacdgnqiams`). Org Pets. Region `eu-central-1`.
 
-- **Preview**: on every pull request, comments the preview URL.
-- **Production**: on pushes to `main`, writes the production URL to the job summary.
-
-Add these repository secrets before running the workflows:
-
-- `VERCEL_TOKEN`
-- `VERCEL_ORG_ID`
-- `VERCEL_PROJECT_ID`
-
-Find IDs with:
+## Scripts
 
 ```bash
-vercel org ls
-vercel projects ls
+npm run ci                 # lint + typecheck + gherkin
+npm run validate:gherkin
+npm run test:e2e           # Cucumber + Playwright (needs running app + Anonymous)
 ```
 
-Optionally set `NEXT_PUBLIC_ENV` for custom environment labels.
+## GitHub secrets
 
-To link locally without secrets run:
+| Secret | Used by |
+|---|---|
+| `GH_PAT` | Release Prepare (`contents: write`) |
+| `VERCEL_TOKEN` | Deploy Production on `v*` tags |
+| `VERCEL_ORG_ID` | Deploy Production |
+| `VERCEL_PROJECT_ID` | Deploy Production |
+| `SUPABASE_ACCESS_TOKEN` | optional `db push` later |
+| `STAGING_PROJECT_REF` | `cwmzjcppchjydaboycje` |
+| `PROD_PROJECT_REF` | `mhvcyahudzacdgnqiams` |
 
-```bash
-npx vercel link
-```
+Vercel Preview env vars = staging. Production env vars = prod. Never Preview → prod.
 
-## Troubleshooting
+## Deploy
 
-- Ensure all secrets are set in **Repository Settings → Secrets and variables → Actions**.
-- Verify organization and project IDs via the Vercel CLI.
-- Run `npm run ci` locally to replicate the CI build.
+- PR → Vercel Preview (staging keys)
+- `main` git deploys are off. **Release Prepare** then **Deploy Production** on the `vX.Y.Z` tag
