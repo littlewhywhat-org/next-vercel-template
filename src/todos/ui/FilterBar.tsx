@@ -1,6 +1,7 @@
 'use client';
 
-import { SegmentedControl } from '@radix-ui/themes';
+import { Toggle } from '@base-ui/react/toggle';
+import { ToggleGroup } from '@base-ui/react/toggle-group';
 import { isTodoFilter, useTodoUi, type TodoFilter } from '@/todos/store';
 
 const items: { value: TodoFilter; label: string }[] = [
@@ -14,20 +15,27 @@ export function FilterBar() {
   const setFilter = useTodoUi((state) => state.setFilter);
 
   return (
-    <SegmentedControl.Root
-      value={filter}
-      onValueChange={(value) => {
-        if (isTodoFilter(value)) {
-          setFilter(value);
+    <ToggleGroup
+      value={[filter]}
+      onValueChange={(groupValue) => {
+        const next = groupValue[0];
+        if (isTodoFilter(next)) {
+          setFilter(next);
         }
       }}
       data-testid="todo-filter"
+      className="flex rounded-lg bg-zinc-800 p-1"
     >
       {items.map((item) => (
-        <SegmentedControl.Item key={item.value} value={item.value} data-testid={`todo-filter-${item.value}`}>
+        <Toggle
+          key={item.value}
+          value={item.value}
+          data-testid={`todo-filter-${item.value}`}
+          className="rounded-md px-3 py-1 text-xs font-medium text-zinc-400 data-[pressed]:bg-zinc-700 data-[pressed]:text-zinc-100"
+        >
           {item.label}
-        </SegmentedControl.Item>
+        </Toggle>
       ))}
-    </SegmentedControl.Root>
+    </ToggleGroup>
   );
 }

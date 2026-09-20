@@ -1,17 +1,18 @@
-import { Heading, Text, type HeadingProps, type TextProps } from '@radix-ui/themes';
+import type { HTMLAttributes } from 'react';
+import { cx } from '@/ui/cx';
 
-export function Title(props: HeadingProps) {
-  return <Heading {...props} size="8" />;
+export function Title({ className, ...props }: HTMLAttributes<HTMLHeadingElement>) {
+  return <h1 className={cx('text-4xl font-bold tracking-tight', className)} {...props} />;
 }
 
-export function Body(props: TextProps) {
-  return <Text {...props} size="3" />;
+export function Body({ className, ...props }: HTMLAttributes<HTMLParagraphElement>) {
+  return <p className={cx('text-base leading-6', className)} {...props} />;
 }
 
-export function Muted(props: TextProps) {
-  return <Text {...props} size="2" color="gray" />;
+export function Muted({ className, ...props }: HTMLAttributes<HTMLParagraphElement>) {
+  return <p className={cx('text-sm text-zinc-400', className)} {...props} />;
 }
 
-export function Label(props: TextProps) {
-  return <Text {...props} size="1" weight="medium" />;
+export function Label({ className, ...props }: HTMLAttributes<HTMLSpanElement>) {
+  return <span className={cx('text-xs font-medium text-zinc-300', className)} {...props} />;
 }

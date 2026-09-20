@@ -1,5 +1,6 @@
-import { Flex, type FlexProps } from '@radix-ui/themes';
+import type { HTMLAttributes } from 'react';
+import { cx } from '@/ui/cx';
 
-export function Stack({ gap = '4', ...props }: FlexProps) {
-  return <Flex gap={gap} {...props} direction="column" />;
+export function Stack({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+  return <div className={cx('flex flex-col gap-4', className)} {...props} />;
 }

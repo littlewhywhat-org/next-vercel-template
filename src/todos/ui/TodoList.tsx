@@ -1,9 +1,9 @@
 'use client';
 
-import { Flex } from '@radix-ui/themes';
 import type { Todo } from '@/todos/api';
 import { EmptyState } from '@/todos/ui/EmptyState';
 import { TodoItem } from '@/todos/ui/TodoItem';
+import { Stack } from '@/ui/Stack';
 
 export function TodoList({
   todos,
@@ -15,7 +15,7 @@ export function TodoList({
   onDelete: (id: string) => void;
 }) {
   return (
-    <Flex direction="column" gap="2" width="100%" data-testid="todo-list">
+    <Stack className="w-full gap-2" data-testid="todo-list">
       {todos.length === 0 ? (
         <EmptyState />
       ) : (
@@ -23,6 +23,6 @@ export function TodoList({
           <TodoItem key={todo.id} todo={todo} onToggle={onToggle} onDelete={onDelete} />
         ))
       )}
-    </Flex>
+    </Stack>
   );
 }

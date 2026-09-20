@@ -1,13 +1,13 @@
 'use client';
 
-import { Card, Flex, Heading, Spinner, Text } from '@radix-ui/themes';
-import { Stack } from '@/ui/Stack';
-import { Label } from '@/ui/type';
 import { FilterBar } from '@/todos/ui/FilterBar';
 import { TodoComposer } from '@/todos/ui/TodoComposer';
 import { TodoList } from '@/todos/ui/TodoList';
 import { useAddTodo, useDeleteTodo, useSession, useTodos, useToggleTodo } from '@/todos/queries';
 import { openCount, useTodoUi, visibleTodos } from '@/todos/store';
+import { Cluster } from '@/ui/Cluster';
+import { Label } from '@/ui/type';
+import { Stack } from '@/ui/Stack';
 
 function message(error: unknown): string {
   return error instanceof Error ? error.message : 'Failed to start';
@@ -24,20 +24,20 @@ export function TodoApp() {
 
   if (error) {
     return (
-      <Card size="3">
-        <Text color="red" data-testid="todo-error">
+      <div className="w-full max-w-md rounded-xl border border-zinc-800 bg-zinc-900 p-6">
+        <p className="text-sm text-red-400" data-testid="todo-error">
           {message(error)}
-        </Text>
-      </Card>
+        </p>
+      </div>
     );
   }
 
   if (!session.isSuccess || todos.isPending) {
     return (
-      <Flex align="center" justify="center" gap="2">
-        <Spinner />
-        <Text>Signing in…</Text>
-      </Flex>
+      <Cluster className="text-sm text-zinc-400">
+        <span className="size-4 animate-spin rounded-full border-2 border-zinc-600 border-t-zinc-200" />
+        Signing in…
+      </Cluster>
     );
   }
 
@@ -45,16 +45,13 @@ export function TodoApp() {
   const open = openCount(rows);
 
   return (
-    <Card size="3" style={{ width: '100%', maxWidth: '28rem' }}>
-      <Stack gap="4">
-        <Flex align="center" justify="between" gap="3" wrap="wrap">
-          <Heading size="6">Todos</Heading>
+    <div className="w-full max-w-md rounded-xl border border-zinc-800 bg-zinc-900 p-6">
+      <Stack>
+        <Cluster className="w-full justify-between">
+          <h2 className="text-xl font-semibold">Todos</h2>
           <Label data-testid="todo-open-count">{open} open</Label>
-        </Flex>
-        <TodoComposer
-          isPending={add.isPending}
-          onAdd={(label) => add.mutate(label)}
-        />
+        </Cluster>
+        <TodoComposer isPending={add.isPending} onAdd={(label) => add.mutate(label)} />
         <FilterBar />
         <TodoList
           todos={visibleTodos(rows, filter)}
@@ -62,6 +59,6 @@ export function TodoApp() {
           onDelete={(id) => remove.mutate(id)}
         />
       </Stack>
-    </Card>
+    </div>
   );
 }

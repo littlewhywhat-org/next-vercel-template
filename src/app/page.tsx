@@ -1,5 +1,5 @@
-import { Badge } from '@radix-ui/themes';
 import { TodoApp } from '@/todos/ui/TodoApp';
+import { Badge } from '@/ui/Badge';
 import { Page } from '@/ui/Page';
 import { Muted, Title } from '@/ui/type';
 
@@ -9,9 +9,7 @@ export default function Home() {
   const env = process.env.NEXT_PUBLIC_ENV ?? 'preview';
   return (
     <Page>
-      <Badge color="jade" variant="surface">
-        {env}
-      </Badge>
+      <Badge>{env}</Badge>
       <Title>Todos</Title>
       <Muted>Anonymous session in this browser. Data is per user via RLS.</Muted>
       <TodoApp />

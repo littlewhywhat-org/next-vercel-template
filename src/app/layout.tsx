@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
-import '@radix-ui/themes/styles.css';
-import { Theme } from '@radix-ui/themes';
 import { Providers } from '@/app/providers';
+import '@/app/globals.css';
 
 export const metadata: Metadata = {
   title: 'Next.js Vercel Template',
@@ -19,9 +18,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <Theme accentColor="indigo" grayColor="slate" radius="large" scaling="105%" appearance="dark">
-          <Providers>{children}</Providers>
-        </Theme>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

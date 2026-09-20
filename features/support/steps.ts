@@ -11,7 +11,7 @@ async function addTodo(world: TodoWorld, label: string) {
 async function completeTodo(world: TodoWorld, label: string) {
   const row = world.page.getByTestId('todo-item').filter({ hasText: label });
   await row.getByTestId('todo-toggle').click();
-  await row.locator('[data-testid="todo-toggle"][data-state="checked"]').waitFor();
+  await row.locator('[data-testid="todo-toggle"][data-checked]').waitFor();
 }
 
 Given('user is signed in', async function (this: TodoWorld) {
@@ -95,7 +95,7 @@ Then('user sees it marked done', async function (this: TodoWorld) {
   await this.page
     .getByTestId('todo-item')
     .filter({ hasText: this.lastLabel })
-    .locator('[data-testid="todo-toggle"][data-state="checked"]')
+    .locator('[data-testid="todo-toggle"][data-checked]')
     .waitFor();
 });
 
@@ -117,7 +117,7 @@ Then('user sees only the done todo', async function (this: TodoWorld) {
   await this.page
     .getByTestId('todo-item')
     .filter({ hasText: this.lastDoneLabel })
-    .locator('[data-testid="todo-toggle"][data-state="checked"]')
+    .locator('[data-testid="todo-toggle"][data-checked]')
     .waitFor();
 });
 

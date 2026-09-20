@@ -1,7 +1,10 @@
 'use client';
 
-import { Button, Checkbox, Flex, Text } from '@radix-ui/themes';
+import { Button } from '@base-ui/react/button';
+import { Checkbox } from '@base-ui/react/checkbox';
 import type { Todo } from '@/todos/api';
+import { Cluster } from '@/ui/Cluster';
+import { cx } from '@/ui/cx';
 
 export function TodoItem({
   todo,
@@ -13,21 +16,28 @@ export function TodoItem({
   onDelete: (id: string) => void;
 }) {
   return (
-    <Flex align="center" gap="3" data-testid="todo-item">
-      <Checkbox
+    <Cluster className="w-full gap-3" data-testid="todo-item">
+      <Checkbox.Root
         checked={Boolean(todo.done_at)}
         onCheckedChange={() => onToggle(todo)}
         data-testid="todo-toggle"
-      />
-      <Text
-        style={{ flex: 1, textDecoration: todo.done_at ? 'line-through' : undefined }}
+        className="flex size-5 shrink-0 items-center justify-center rounded border border-zinc-500 data-[checked]:border-indigo-400 data-[checked]:bg-indigo-500"
+      >
+        <Checkbox.Indicator className="text-[10px] leading-none text-white">✓</Checkbox.Indicator>
+      </Checkbox.Root>
+      <span
+        className={cx('flex-1 text-sm', todo.done_at && 'text-zinc-500 line-through')}
         data-testid="todo-label"
       >
         {todo.label}
-      </Text>
-      <Button size="1" variant="soft" color="red" onClick={() => onDelete(todo.id)} data-testid="todo-delete">
+      </span>
+      <Button
+        onClick={() => onDelete(todo.id)}
+        data-testid="todo-delete"
+        className="rounded-md bg-red-500/15 px-2 py-1 text-xs font-medium text-red-300 hover:bg-red-500/25"
+      >
         Delete
       </Button>
-    </Flex>
+    </Cluster>
   );
 }

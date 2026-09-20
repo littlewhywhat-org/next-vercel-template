@@ -1,5 +1,6 @@
-import { Flex, type FlexProps } from '@radix-ui/themes';
+import type { HTMLAttributes } from 'react';
+import { cx } from '@/ui/cx';
 
-export function Cluster({ gap = '2', ...props }: FlexProps) {
-  return <Flex align="center" gap={gap} {...props} wrap="wrap" />;
+export function Cluster({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+  return <div className={cx('flex flex-wrap items-center gap-2', className)} {...props} />;
 }
