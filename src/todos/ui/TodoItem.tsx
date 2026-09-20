@@ -1,7 +1,7 @@
 'use client';
 
 import { Button, Checkbox, Flex, Text } from '@radix-ui/themes';
-import type { Todo } from '@/features/todos/api';
+import type { Todo } from '@/todos/api';
 
 export function TodoItem({
   todo,

@@ -1,7 +1,7 @@
 'use client';
 
 import { SegmentedControl } from '@radix-ui/themes';
-import { isTodoFilter, useTodoUi, type TodoFilter } from '@/features/todos/store';
+import { isTodoFilter, useTodoUi, type TodoFilter } from '@/todos/store';
 
 const items: { value: TodoFilter; label: string }[] = [
   { value: 'all', label: 'All' },

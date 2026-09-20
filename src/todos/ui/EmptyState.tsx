@@ -1,7 +1,7 @@
 'use client';
 
 import { Text } from '@radix-ui/themes';
-import { emptyCopy, useTodoUi } from '@/features/todos/store';
+import { emptyCopy, useTodoUi } from '@/todos/store';
 
 export function EmptyState() {
   const filter = useTodoUi((state) => state.filter);

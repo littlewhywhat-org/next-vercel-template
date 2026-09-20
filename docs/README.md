@@ -1,5 +1,7 @@
 # Docs
 
+Layout and conventions: [README](../README.md) (slices, Query vs Zustand, Gherkin).
+
 | File | What |
 |---|---|
 | [flows.md](flows.md) | User flows (`.feature` Gherkin) |

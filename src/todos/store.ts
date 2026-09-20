@@ -1,7 +1,7 @@
 'use client';
 
 import { create } from 'zustand';
-import type { Todo } from '@/features/todos/api';
+import type { Todo } from '@/todos/api';
 
 export type TodoFilter = 'all' | 'open' | 'done';
 

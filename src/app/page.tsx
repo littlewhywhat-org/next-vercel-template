@@ -1,5 +1,5 @@
 import { Badge } from '@radix-ui/themes';
-import { TodoApp } from '@/features/todos/ui/TodoApp';
+import { TodoApp } from '@/todos/ui/TodoApp';
 import { Page } from '@/ui/Page';
 import { Muted, Title } from '@/ui/type';
 

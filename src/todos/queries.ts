@@ -7,8 +7,8 @@ import {
   listTodos,
   setTodoDone,
   type Todo,
-} from '@/features/todos/api';
-import { ensureAnonymousSession } from '@/features/todos/session';
+} from '@/todos/api';
+import { ensureAnonymousSession } from '@/todos/session';
 
 export const todoKeys = {
   all: ['todos'] as const,

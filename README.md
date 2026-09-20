@@ -2,6 +2,52 @@
 
 Anonymous Auth, RLS `todos`, Gherkin + Cucumber, Preview → staging / tag → production.
 
+Copy this layout on the next app. `features/` is Cucumber only.
+
+## Layout
+
+```
+src/
+  app/              routes, Providers (QueryClient)
+  ui/               layout + type atoms (no product names)
+  lib/supabase/     browser/server/middleware clients
+  todos/            one product slice (data + UI for that capability)
+docs/flows/         Gherkin specs
+features/support/   Cucumber + Playwright glue
+```
+
+A **slice** is a user-facing capability with its own data (`todos`, later `board`). Not a component (`TodoItem`). Keep them in the low single digits.
+
+| Import | From |
+|---|---|
+| Slice → | `@/ui`, `@/lib/*` |
+| Slice → sibling slice | never |
+| Two slices need the same thing | extract to `lib/` or `ui/`, or merge the slices |
+
+Do not add `src/features/`. Next product folder is `src/<name>/`.
+
+## State
+
+| Kind | Tool | Here |
+|---|---|---|
+| Server / async | TanStack Query | session, `todos` list, mutations |
+| UI shared by sibling components in the slice | Zustand | `all / open / done` filter |
+| UI local to one component | `useState` | composer draft |
+
+Do not put fetched rows in Zustand. Filter is view-only (does not write rows). Optimistic updates live in Query (`onMutate`).
+
+## UI atoms
+
+`src/ui`: `Page`, `Stack`, `Cluster`, `Title`, `Body`, `Muted`, `Label`. Radix Themes underneath. Do not wrap `Button` / `Checkbox` / `TextField`. Lock type roles so screens do not pick `Heading size` at random.
+
+## Gherkin
+
+- Specs: `docs/flows/*.feature`. Glue: `features/support/`.
+- `Background` / `Given` = state. `When` = one action. `Then` = what the user sees.
+- `npm run ci` runs `cucumber --dry-run` (bind steps, no browser). No custom gherkin parser.
+- Full e2e: PR label `e2e`, `supabase start` on the runner. Not staging/prod (that floods `auth.users`).
+- `data-testid`s live on the slice UI (`todo-list`, `todo-filter-open`, …).
+
 ## Prerequisites
 
 - Node 24 (`.nvmrc`)

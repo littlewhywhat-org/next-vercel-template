@@ -1,9 +1,9 @@
 'use client';
 
 import { Flex } from '@radix-ui/themes';
-import type { Todo } from '@/features/todos/api';
-import { EmptyState } from '@/features/todos/ui/EmptyState';
-import { TodoItem } from '@/features/todos/ui/TodoItem';
+import type { Todo } from '@/todos/api';
+import { EmptyState } from '@/todos/ui/EmptyState';
+import { TodoItem } from '@/todos/ui/TodoItem';
 
 export function TodoList({
   todos,

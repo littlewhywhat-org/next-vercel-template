@@ -3,11 +3,11 @@
 import { Card, Flex, Heading, Spinner, Text } from '@radix-ui/themes';
 import { Stack } from '@/ui/Stack';
 import { Label } from '@/ui/type';
-import { FilterBar } from '@/features/todos/ui/FilterBar';
-import { TodoComposer } from '@/features/todos/ui/TodoComposer';
-import { TodoList } from '@/features/todos/ui/TodoList';
-import { useAddTodo, useDeleteTodo, useSession, useTodos, useToggleTodo } from '@/features/todos/queries';
-import { openCount, useTodoUi, visibleTodos } from '@/features/todos/store';
+import { FilterBar } from '@/todos/ui/FilterBar';
+import { TodoComposer } from '@/todos/ui/TodoComposer';
+import { TodoList } from '@/todos/ui/TodoList';
+import { useAddTodo, useDeleteTodo, useSession, useTodos, useToggleTodo } from '@/todos/queries';
+import { openCount, useTodoUi, visibleTodos } from '@/todos/store';
 
 function message(error: unknown): string {
   return error instanceof Error ? error.message : 'Failed to start';
