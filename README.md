@@ -62,7 +62,7 @@ Design system: [docs/design-system.md](docs/design-system.md). Bright gray theme
 
 ## Prerequisites
 
-- Node 22 (`.nvmrc`)
+- Node 24 (`.nvmrc`)
 - pnpm 10 (`packageManager`)
 - Docker (for local Supabase / e2e)
 
