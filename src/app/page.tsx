@@ -11,7 +11,9 @@ export default function Home() {
     <Page>
       <Badge>{env}</Badge>
       <Title>Todos</Title>
-      <Muted>Anonymous session in this browser. Data is per user via RLS.</Muted>
+      <Muted>
+        Anonymous session in this browser. Data is per user via RLS.
+      </Muted>
       <TodoApp />
     </Page>
   );

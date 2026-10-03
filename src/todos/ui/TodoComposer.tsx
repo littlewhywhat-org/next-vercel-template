@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
 import { Button } from '@base-ui/react/button';
 import { Input } from '@base-ui/react/input';
+import { Plus } from '@phosphor-icons/react';
+import { useState } from 'react';
 import { Cluster } from '@/ui/Cluster';
 import { cx } from '@/ui/cx';
-import { Plus } from '@phosphor-icons/react';
 
 export function TodoComposer({
   onAdd,
@@ -28,7 +28,7 @@ export function TodoComposer({
   return (
     <Cluster className={cx('w-full')}>
       <Input
-        placeholder="Add a todo"
+        placeholder='Add a todo'
         value={draft}
         onValueChange={(value) => setDraft(value)}
         onKeyDown={(event) => {
@@ -36,16 +36,16 @@ export function TodoComposer({
             submit();
           }
         }}
-        data-testid="todo-input"
+        data-testid='todo-input'
         className={cx(
-          'min-w-0 flex-1 rounded-control border border-border bg-sunken px-3 py-2 text-sm text-fg outline-none placeholder:text-faint focus:border-accent',
+          'min-w-0 flex-1 rounded-control border border-border bg-sunken px-3 py-2 text-fg text-sm outline-none placeholder:text-faint focus:border-accent',
         )}
       />
       <Button
         onClick={submit}
-        data-testid="todo-add"
+        data-testid='todo-add'
         className={cx(
-          'inline-flex items-center gap-1.5 rounded-control bg-accent px-3 py-2 text-sm font-medium text-on-accent hover:bg-accent-hover',
+          'inline-flex items-center gap-1.5 rounded-control bg-accent px-3 py-2 font-medium text-on-accent text-sm hover:bg-accent-hover',
         )}
       >
         <Plus aria-hidden className={cx('size-4')} />

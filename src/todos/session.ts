@@ -2,7 +2,8 @@ import { createClient } from '@/lib/supabase/client';
 
 export async function ensureAnonymousSession() {
   const supabase = createClient();
-  const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+  const { data: sessionData, error: sessionError } =
+    await supabase.auth.getSession();
   if (sessionError) {
     throw sessionError;
   }

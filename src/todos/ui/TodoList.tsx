@@ -19,7 +19,7 @@ export function TodoList({
   const reduce = useReducedMotion();
 
   return (
-    <Stack className={cx('w-full gap-2')} data-testid="todo-list">
+    <Stack className={cx('w-full gap-2')} data-testid='todo-list'>
       <AnimatePresence initial={false}>
         {todos.map((todo) => (
           <motion.div
