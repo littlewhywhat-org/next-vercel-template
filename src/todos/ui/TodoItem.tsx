@@ -16,17 +16,19 @@ export function TodoItem({
   onDelete: (id: string) => void;
 }) {
   return (
-    <Cluster className="w-full gap-3" data-testid="todo-item">
+    <Cluster className={cx('w-full gap-3')} data-testid="todo-item">
       <Checkbox.Root
         checked={Boolean(todo.done_at)}
         onCheckedChange={() => onToggle(todo)}
         data-testid="todo-toggle"
-        className="flex size-5 shrink-0 items-center justify-center rounded border border-zinc-500 data-[checked]:border-indigo-400 data-[checked]:bg-indigo-500"
+        className={cx(
+          'flex size-5 shrink-0 items-center justify-center rounded-control border border-border-strong bg-surface data-[checked]:border-accent data-[checked]:bg-accent',
+        )}
       >
-        <Checkbox.Indicator className="text-[10px] leading-none text-white">✓</Checkbox.Indicator>
+        <Checkbox.Indicator className={cx('text-[10px] leading-none text-on-accent')}>✓</Checkbox.Indicator>
       </Checkbox.Root>
       <span
-        className={cx('flex-1 text-sm', todo.done_at && 'text-zinc-500 line-through')}
+        className={cx('flex-1 text-sm text-fg', todo.done_at && 'text-faint line-through')}
         data-testid="todo-label"
       >
         {todo.label}
@@ -34,7 +36,9 @@ export function TodoItem({
       <Button
         onClick={() => onDelete(todo.id)}
         data-testid="todo-delete"
-        className="rounded-md bg-red-500/15 px-2 py-1 text-xs font-medium text-red-300 hover:bg-red-500/25"
+        className={cx(
+          'rounded-control bg-danger-soft px-2 py-1 text-xs font-medium text-danger hover:bg-danger hover:text-on-accent',
+        )}
       >
         Delete
       </Button>

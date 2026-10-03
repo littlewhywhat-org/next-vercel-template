@@ -6,7 +6,9 @@ import { TodoList } from '@/todos/ui/TodoList';
 import { useAddTodo, useDeleteTodo, useSession, useTodos, useToggleTodo } from '@/todos/queries';
 import { openCount, useTodoUi, visibleTodos } from '@/todos/store';
 import { Cluster } from '@/ui/Cluster';
-import { Label } from '@/ui/type';
+import { cx } from '@/ui/cx';
+import { Surface } from '@/ui/Surface';
+import { Heading, Label } from '@/ui/type';
 import { Stack } from '@/ui/Stack';
 
 function message(error: unknown): string {
@@ -24,18 +26,18 @@ export function TodoApp() {
 
   if (error) {
     return (
-      <div className="w-full max-w-md rounded-xl border border-zinc-800 bg-zinc-900 p-6">
-        <p className="text-sm text-red-400" data-testid="todo-error">
+      <Surface className={cx('max-w-md')}>
+        <p className={cx('text-sm text-danger')} data-testid="todo-error">
           {message(error)}
         </p>
-      </div>
+      </Surface>
     );
   }
 
   if (!session.isSuccess || todos.isPending) {
     return (
-      <Cluster className="text-sm text-zinc-400">
-        <span className="size-4 animate-spin rounded-full border-2 border-zinc-600 border-t-zinc-200" />
+      <Cluster className={cx('text-sm text-muted')}>
+        <span className={cx('size-4 animate-spin rounded-full border-2 border-border-strong border-t-fg')} />
         Signing in…
       </Cluster>
     );
@@ -45,10 +47,10 @@ export function TodoApp() {
   const open = openCount(rows);
 
   return (
-    <div className="w-full max-w-md rounded-xl border border-zinc-800 bg-zinc-900 p-6">
+    <Surface className={cx('max-w-md')}>
       <Stack>
-        <Cluster className="w-full justify-between">
-          <h2 className="text-xl font-semibold">Todos</h2>
+        <Cluster className={cx('w-full justify-between')}>
+          <Heading>Todos</Heading>
           <Label data-testid="todo-open-count">{open} open</Label>
         </Cluster>
         <TodoComposer isPending={add.isPending} onAdd={(label) => add.mutate(label)} />
@@ -59,6 +61,6 @@ export function TodoApp() {
           onDelete={(id) => remove.mutate(id)}
         />
       </Stack>
-    </div>
+    </Surface>
   );
 }

@@ -3,6 +3,7 @@
 import type { Todo } from '@/todos/api';
 import { EmptyState } from '@/todos/ui/EmptyState';
 import { TodoItem } from '@/todos/ui/TodoItem';
+import { cx } from '@/ui/cx';
 import { Stack } from '@/ui/Stack';
 
 export function TodoList({
@@ -15,7 +16,7 @@ export function TodoList({
   onDelete: (id: string) => void;
 }) {
   return (
-    <Stack className="w-full gap-2" data-testid="todo-list">
+    <Stack className={cx('w-full gap-2')} data-testid="todo-list">
       {todos.length === 0 ? (
         <EmptyState />
       ) : (

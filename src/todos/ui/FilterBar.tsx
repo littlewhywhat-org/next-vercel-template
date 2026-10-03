@@ -3,6 +3,7 @@
 import { Toggle } from '@base-ui/react/toggle';
 import { ToggleGroup } from '@base-ui/react/toggle-group';
 import { isTodoFilter, useTodoUi, type TodoFilter } from '@/todos/store';
+import { cx } from '@/ui/cx';
 
 const items: { value: TodoFilter; label: string }[] = [
   { value: 'all', label: 'All' },
@@ -24,14 +25,16 @@ export function FilterBar() {
         }
       }}
       data-testid="todo-filter"
-      className="flex rounded-lg bg-zinc-800 p-1"
+      className={cx('flex rounded-card bg-sunken p-1')}
     >
       {items.map((item) => (
         <Toggle
           key={item.value}
           value={item.value}
           data-testid={`todo-filter-${item.value}`}
-          className="rounded-md px-3 py-1 text-xs font-medium text-zinc-400 data-[pressed]:bg-zinc-700 data-[pressed]:text-zinc-100"
+          className={cx(
+            'rounded-control px-3 py-1 text-xs font-medium text-muted data-[pressed]:bg-surface data-[pressed]:text-fg data-[pressed]:shadow-sm',
+          )}
         >
           {item.label}
         </Toggle>

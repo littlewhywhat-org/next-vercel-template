@@ -44,9 +44,11 @@ Tailwind CSS **v4** (`4.3.x`) + Base UI (`@base-ui/react` `1.8.x`). Not Radix Th
 |---|---|
 | Tailwind | layout, type, color |
 | Base UI | interactive controls: `Button`, `Input`, `Checkbox`, `ToggleGroup` |
-| `src/ui` | `Page`, `Stack`, `Cluster`, `Title`, `Body`, `Muted`, `Label`, `Badge` |
+| `src/ui` | `Page`, `Stack`, `Cluster`, `Surface`, `Title`, `Heading`, `Body`, `Muted`, `Label`, `Badge` |
 
 Do not wrap Base UI Button/Checkbox/Input. Style them with `className` at the call site. Landing (Astro) stays Tailwind + Starwind; this Next app is Tailwind + Base UI.
+
+Design system: [docs/design-system.md](docs/design-system.md). Bright gray theme. Raw ramp and roles: `src/app/globals.css`. Components use role utilities (`bg-canvas`, `text-fg`, `bg-accent`). Every `className` goes through `cx`. `tailwindcss/classnames-order` sorts those classes.
 
 ## Gherkin
 
