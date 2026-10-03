@@ -10,15 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
-          cache: npm
+          cache: pnpm
       - uses: supabase/setup-cli@v1
         with:
           version: 2.58.5
-      - run: npm ci
-      - run: npx playwright install --with-deps chromium
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
       - name: Start local Supabase
         run: supabase start
       - name: Build, start app, e2e
@@ -41,10 +42,10 @@ jobs:
           NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
           NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
           EOF
-          npm run build
-          npm start > next-start.log 2>&1 &
-          npx wait-on http://127.0.0.1:3000
-          npm run test:e2e
+          pnpm build
+          pnpm start > next-start.log 2>&1 &
+          pnpm exec wait-on http://127.0.0.1:3000
+          pnpm test:e2e
       - name: Dump server log
         if: failure()
         run: |
