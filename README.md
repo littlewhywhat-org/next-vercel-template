@@ -24,7 +24,7 @@ A **slice** is a user-facing capability with its own data (`todos`, later `board
 | Slice → sibling slice | never |
 | Two slices need the same thing | extract to `lib/` or `ui/`, or merge the slices |
 
-Do not add `src/features/`. Next product folder is `src/<name>/`.
+Do not add `src/features/`. Next product folder is `src/<name>/`. Read/write contract: [docs/slices.md](docs/slices.md).
 
 ## State
 
