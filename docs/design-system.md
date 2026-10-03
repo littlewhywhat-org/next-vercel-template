@@ -57,6 +57,12 @@ Every `className` goes through `cx` (`src/ui/cx.ts`), including a single static 
 
 `@phosphor-icons/react`. Root exports: `Plus`, `Check`, `Trash`, `ListBullets`. Color is `currentColor`. Size is a Tailwind class (`size-4`, `size-3`). `aria-hidden` on decorative icons. Favicon stays `public/favicon.svg`.
 
+## Motion
+
+Loops are Tailwind: `animate-spin` (signing in), `animate-pulse`, `animate-ping`, `animate-bounce`. No spinner package.
+
+`motion` is for enter and exit. A todo row fades in over 160ms. `useReducedMotion` sets that duration to 0.
+
 ## Controls
 
 Base UI `Button`, `Input`, `Checkbox`, `Toggle`, `ToggleGroup`. No wrappers. `className` at the call site uses roles.

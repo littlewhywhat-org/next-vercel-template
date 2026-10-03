@@ -45,6 +45,7 @@ Tailwind CSS **v4** (`4.3.x`) + Base UI (`@base-ui/react` `1.8.x`). Not Radix Th
 | Tailwind | layout, type, color |
 | Base UI | interactive controls: `Button`, `Input`, `Checkbox`, `ToggleGroup` |
 | Phosphor | icons (`@phosphor-icons/react`) |
+| Motion | enter / exit (`motion`) |
 | `src/ui` | `Page`, `Stack`, `Cluster`, `Surface`, `Title`, `Heading`, `Body`, `Muted`, `Label`, `Badge` |
 
 Do not wrap Base UI Button/Checkbox/Input. Style them with `className` at the call site. Landing (Astro) stays Tailwind + Starwind; this Next app is Tailwind + Base UI.
