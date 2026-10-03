@@ -23,6 +23,24 @@
     "enabled": true,
     "rules": {
       "preset": "recommended",
+      "complexity": {
+        "noExcessiveCognitiveComplexity": {
+          "level": "error",
+          "options": {
+            "maxAllowedComplexity": 15
+          }
+        },
+        "noExcessiveLinesPerFunction": {
+          "level": "error",
+          "options": {
+            "maxLines": 50,
+            "skipBlankLines": true
+          }
+        }
+      },
+      "suspicious": {
+        "noImportCycles": "error"
+      },
       "nursery": {
         "useSortedClasses": {
           "level": "error",
@@ -37,5 +55,56 @@
     "parser": {
       "tailwindDirectives": true
     }
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["src/ui/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": [
+                      "@/todos",
+                      "@/todos/**",
+                      "@/app",
+                      "@/app/**",
+                      "**/todos",
+                      "**/todos/**",
+                      "**/app",
+                      "**/app/**"
+                    ],
+                    "message": "ui does not import todos or app code."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/todos/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": ["@/app", "@/app/**", "**/app", "**/app/**"],
+                    "message": "todos does not import app code."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
 }
