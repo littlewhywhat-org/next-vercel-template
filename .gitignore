@@ -6,3 +6,6 @@ out
 !.env.example
 .DS_Store
 tsconfig.tsbuildinfo
+e2e-artifacts
+cucumber-report.json
+next-start.log
