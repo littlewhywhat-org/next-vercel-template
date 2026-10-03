@@ -5,6 +5,7 @@ import { Button } from '@base-ui/react/button';
 import { Input } from '@base-ui/react/input';
 import { Cluster } from '@/ui/Cluster';
 import { cx } from '@/ui/cx';
+import { PlusIcon } from '@/ui/icons';
 
 export function TodoComposer({
   onAdd,
@@ -44,9 +45,10 @@ export function TodoComposer({
         onClick={submit}
         data-testid="todo-add"
         className={cx(
-          'rounded-control bg-accent px-3 py-2 text-sm font-medium text-on-accent hover:bg-accent-hover',
+          'inline-flex items-center gap-1.5 rounded-control bg-accent px-3 py-2 text-sm font-medium text-on-accent hover:bg-accent-hover',
         )}
       >
+        <PlusIcon />
         Add
       </Button>
     </Cluster>

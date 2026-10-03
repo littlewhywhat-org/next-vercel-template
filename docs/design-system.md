@@ -53,6 +53,10 @@ Space step is Tailwind's 4px (`gap-2` = 8px, `gap-4` = 16px). Radius: `rounded-c
 
 Every `className` goes through `cx` (`src/ui/cx.ts`), including a single static string. ESLint rule `tailwindcss/classnames-order` sorts classes inside `cx` and `className`. `npm run lint` fails when the order is wrong; `eslint --fix` rewrites it.
 
+## Icons
+
+`src/ui/icons.tsx`. 16×16 stroke, `currentColor`, `aria-hidden`. `PlusIcon` (add), `CheckIcon` (done), `TrashIcon` (delete), `ListIcon` (empty). Favicon `public/favicon.svg` is the same check on accent `#3f3f46`.
+
 ## Controls
 
 Base UI `Button`, `Input`, `Checkbox`, `Toggle`, `ToggleGroup`. No wrappers. `className` at the call site uses roles.

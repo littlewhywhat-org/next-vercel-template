@@ -5,6 +5,7 @@ import { Checkbox } from '@base-ui/react/checkbox';
 import type { Todo } from '@/todos/api';
 import { Cluster } from '@/ui/Cluster';
 import { cx } from '@/ui/cx';
+import { CheckIcon, TrashIcon } from '@/ui/icons';
 
 export function TodoItem({
   todo,
@@ -25,7 +26,9 @@ export function TodoItem({
           'flex size-5 shrink-0 items-center justify-center rounded-control border border-border-strong bg-surface data-[checked]:border-accent data-[checked]:bg-accent',
         )}
       >
-        <Checkbox.Indicator className={cx('text-[10px] leading-none text-on-accent')}>✓</Checkbox.Indicator>
+        <Checkbox.Indicator className={cx('text-on-accent')}>
+          <CheckIcon className={cx('size-3')} />
+        </Checkbox.Indicator>
       </Checkbox.Root>
       <span
         className={cx('flex-1 text-sm text-fg', todo.done_at && 'text-faint line-through')}
@@ -37,9 +40,10 @@ export function TodoItem({
         onClick={() => onDelete(todo.id)}
         data-testid="todo-delete"
         className={cx(
-          'rounded-control bg-danger-soft px-2 py-1 text-xs font-medium text-danger hover:bg-danger hover:text-on-accent',
+          'inline-flex items-center gap-1 rounded-control bg-danger-soft px-2 py-1 text-xs font-medium text-danger hover:bg-danger hover:text-on-accent',
         )}
       >
+        <TrashIcon className={cx('size-3')} />
         Delete
       </Button>
     </Cluster>
