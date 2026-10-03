@@ -51,7 +51,7 @@ Space step is Tailwind's 4px (`gap-2` = 8px, `gap-4` = 16px). Radius: `rounded-c
 
 ## Classes
 
-Every `className` goes through `cx` (`src/ui/cx.ts`), including a single static string. ESLint rule `tailwindcss/classnames-order` sorts classes inside `cx` and `className`. `npm run lint` fails when the order is wrong; `eslint --fix` rewrites it.
+Every `className` goes through `cx` (`src/ui/cx.ts`), including a single static string. Biome rule `useSortedClasses` sorts classes inside `cx` and `className`. `pnpm lint` fails when the order is wrong; `pnpm exec biome check --write .` rewrites it.
 
 ## Icons
 

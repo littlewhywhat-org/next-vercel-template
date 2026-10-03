@@ -19,7 +19,11 @@ export async function listTodos(): Promise<Todo[]> {
   return data ?? [];
 }
 
-export async function insertTodo(input: { userId: string; label: string; sort: number }): Promise<void> {
+export async function insertTodo(input: {
+  userId: string;
+  label: string;
+  sort: number;
+}): Promise<void> {
   const { error } = await createClient().from('todos').insert({
     user_id: input.userId,
     label: input.label,
@@ -30,8 +34,14 @@ export async function insertTodo(input: { userId: string; label: string; sort: n
   }
 }
 
-export async function setTodoDone(id: string, done_at: string | null): Promise<void> {
-  const { error } = await createClient().from('todos').update({ done_at }).eq('id', id);
+export async function setTodoDone(
+  id: string,
+  done_at: string | null,
+): Promise<void> {
+  const { error } = await createClient()
+    .from('todos')
+    .update({ done_at })
+    .eq('id', id);
   if (error) {
     throw error;
   }

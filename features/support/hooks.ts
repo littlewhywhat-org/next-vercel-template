@@ -1,5 +1,5 @@
-import { After, Before, setDefaultTimeout } from '@cucumber/cucumber';
 import { mkdirSync } from 'node:fs';
+import { After, Before, setDefaultTimeout } from '@cucumber/cucumber';
 import { chromium } from 'playwright';
 import type { TodoWorld } from './world.ts';
 
@@ -41,7 +41,9 @@ After(async function (this: TodoWorld, { pickle, result }) {
       console.error(`todo-error: ${err}`);
     }
     console.error(body.slice(0, 2000));
-    await this.page.screenshot({ path: `e2e-artifacts/${slug}.png`, fullPage: true }).catch(() => {});
+    await this.page
+      .screenshot({ path: `e2e-artifacts/${slug}.png`, fullPage: true })
+      .catch(() => {});
   }
   await this.context?.close();
   await this.browser?.close();
