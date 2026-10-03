@@ -56,7 +56,7 @@ Design system: [docs/design-system.md](docs/design-system.md). Bright gray theme
 
 - Specs: `docs/flows/*.feature`. Glue: `features/support/`.
 - `Background` / `Given` = state. `When` = one action. `Then` = what the user sees.
-- `pnpm ci` runs `cucumber-js --dry-run` (bind steps, no browser). No custom gherkin parser.
+- `pnpm run ci` runs `cucumber-js --dry-run` (bind steps, no browser). No custom gherkin parser.
 - Full e2e: PR label `e2e`, `supabase start` on the runner. Not staging/prod (that floods `auth.users`).
 - `data-testid`s live on the slice UI (`todo-list`, `todo-filter-open`, …).
 
@@ -88,7 +88,7 @@ Projects: `pets-staging` (`cwmzjcppchjydaboycje`), `pets-prod` (`mhvcyahudzacdgn
 
 ```bash
 npx supabase start         # local API http://127.0.0.1:54321, applies supabase/migrations
-pnpm ci                 # lint + typecheck + cucumber-js --dry-run
+pnpm run ci             # lint + typecheck + cucumber-js --dry-run
 pnpm test:e2e:dry       # parse features and bind steps, no browser
 pnpm test:e2e           # Cucumber + Playwright against local Supabase, not staging
 ```
