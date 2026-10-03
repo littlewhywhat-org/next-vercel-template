@@ -5,7 +5,7 @@ import { Button } from '@base-ui/react/button';
 import { Input } from '@base-ui/react/input';
 import { Cluster } from '@/ui/Cluster';
 import { cx } from '@/ui/cx';
-import { PlusIcon } from '@/ui/icons';
+import { Plus } from '@phosphor-icons/react';
 
 export function TodoComposer({
   onAdd,
@@ -48,7 +48,7 @@ export function TodoComposer({
           'inline-flex items-center gap-1.5 rounded-control bg-accent px-3 py-2 text-sm font-medium text-on-accent hover:bg-accent-hover',
         )}
       >
-        <PlusIcon />
+        <Plus aria-hidden className={cx('size-4')} />
         Add
       </Button>
     </Cluster>

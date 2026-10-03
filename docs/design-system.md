@@ -55,7 +55,7 @@ Every `className` goes through `cx` (`src/ui/cx.ts`), including a single static 
 
 ## Icons
 
-`src/ui/icons.tsx`. 16×16 stroke, `currentColor`, `aria-hidden`. `PlusIcon` (add), `CheckIcon` (done), `TrashIcon` (delete), `ListIcon` (empty). Favicon `public/favicon.svg` is the same check on accent `#3f3f46`.
+`@phosphor-icons/react`. Root exports: `Plus`, `Check`, `Trash`, `ListBullets`. Color is `currentColor`. Size is a Tailwind class (`size-4`, `size-3`). `aria-hidden` on decorative icons. Favicon stays `public/favicon.svg`.
 
 ## Controls
 

@@ -5,7 +5,7 @@ import { Checkbox } from '@base-ui/react/checkbox';
 import type { Todo } from '@/todos/api';
 import { Cluster } from '@/ui/Cluster';
 import { cx } from '@/ui/cx';
-import { CheckIcon, TrashIcon } from '@/ui/icons';
+import { Check, Trash } from '@phosphor-icons/react';
 
 export function TodoItem({
   todo,
@@ -27,7 +27,7 @@ export function TodoItem({
         )}
       >
         <Checkbox.Indicator className={cx('text-on-accent')}>
-          <CheckIcon className={cx('size-3')} />
+          <Check aria-hidden className={cx('size-3')} />
         </Checkbox.Indicator>
       </Checkbox.Root>
       <span
@@ -43,7 +43,7 @@ export function TodoItem({
           'inline-flex items-center gap-1 rounded-control bg-danger-soft px-2 py-1 text-xs font-medium text-danger hover:bg-danger hover:text-on-accent',
         )}
       >
-        <TrashIcon className={cx('size-3')} />
+        <Trash aria-hidden className={cx('size-3')} />
         Delete
       </Button>
     </Cluster>
