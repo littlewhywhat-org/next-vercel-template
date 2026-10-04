@@ -2,7 +2,7 @@
 
 Anonymous Auth, RLS `todos`, Gherkin + Cucumber, Preview → staging / tag → production.
 
-Copy this layout on the next app. `features/` is Cucumber only.
+Copy this layout on the next app. Steps: [docs/new-app.md](docs/new-app.md). `features/` is Cucumber only.
 
 ## Layout
 
