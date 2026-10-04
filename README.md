@@ -10,7 +10,8 @@ Copy this layout on the next app. `features/` is Cucumber only.
 src/
   app/              routes, Providers (QueryClient)
   ui/               layout + type atoms (no product names)
-  lib/supabase/     browser/server/middleware clients
+  api/              shared columns, one file per entity, when a second slice needs them
+  lib/supabase/     browser/server/middleware clients. Not entities
   todos/            one product slice (data + UI for that capability)
 docs/flows/         Gherkin specs
 features/support/   Cucumber + Playwright glue
@@ -20,9 +21,11 @@ A **slice** is a user-facing capability with its own data (`todos`, later `board
 
 | Import | From |
 |---|---|
-| Slice → | `@/ui`, `@/lib/*` |
+| Slice → | `@/ui`, `@/api/*`, `@/lib/*` |
 | Slice → sibling slice | never |
-| Two slices need the same thing | extract to `lib/` or `ui/`, or merge the slices |
+| Same column in two slices | `src/api/<entity>.ts`. That file is the only writer of those fields |
+| Same component in two slices | `src/ui` |
+| `src/lib` | client and keys. Not entities |
 
 Do not add `src/features/`. Next product folder is `src/<name>/`. Read/write contract: [docs/slices.md](docs/slices.md).
 
