@@ -9,5 +9,6 @@ Layout and conventions: [README](../README.md) (slices, Query vs Zustand, Gherki
 | [invariants.md](invariants.md) | Rules every flow must respect |
 | [design-system.md](design-system.md) | Tokens, type, layout, controls |
 | [slices.md](slices.md) | Read/write contract per slice |
+| [new-app.md](new-app.md) | Copy this template into a new app |
 
 Cucumber binds the same `.feature` files.
